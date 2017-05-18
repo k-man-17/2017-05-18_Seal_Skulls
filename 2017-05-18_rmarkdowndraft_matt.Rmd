@@ -1,0 +1,57 @@
+---
+title: "Seal Skulls from NHM sea mammals collection"
+author: "Authors: Seal skulls Crew"
+date: "18 May 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+library(ggfortify)
+library(colourpicker)
+library(ggplot2)
+library(knitr)
+library(rmarkdown)
+library(reprex)
+library(formatR)
+library(knitr)
+library(lubridate)
+```
+
+```{r}
+#CLEAN CSV FILE LOCATION HERE
+```
+
+```{r, eval = FALSE}
+tbl_df(seal_skulls)
+```
+
+
+```{r}
+CBL_ZW <-
+seal_skulls %>%
+  ggplot(x = CBL, y = ZW, colour = Sex)+
+  geom_point(aes(x=CBL, y=ZW, colour = Sex), size = 6)
+```
+
+```{r}
+plot(CBL_ZW)
+```
+
+```{r}
+CBL_PL <-
+seal_skulls %>%
+  ggplot(x = CBL, y = PL, colour = Sex)+
+  geom_point(aes(x=CBL, y=PL, colour = Sex), size = 6)
+```
+
+```{r}
+plot(CBL_PL)
+```
+Look at our shiny plots
