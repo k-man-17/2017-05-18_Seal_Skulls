@@ -1,0 +1,73 @@
+---
+title: "seal_skull_murielr_180517"
+author: "Muriel"
+date: "18 May 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+list.files()
+getwd()
+
+data <- read.csv("seal_clean.csv")
+
+head(data)
+names(data)
+plot(data)
+
+###### all on same plot
+ggplot(data, aes(x = age_months))+
+geom_point(aes(y = ZW), colour = "steelblue", size = 3)+
+geom_point(aes(y = PL), colour = "darkgreen", size = 3)+
+geom_point(aes(y = CBL), colour = "deeppink", size = 3)+
+xlab(label = "age months") + 
+ylab(label = "length")
+
+###### one plot
+ggplot(data, aes(ZW, age_months, colour = Sex)) +
+  geom_point( size = 3)
+
+####### do a linear regression model and add trendline -- 
+
+###### first change datasheed to length in 1 column
+test <-
+  data %>%
+  gather(l_type, length, CBL:PL)
+
+######### log length
+test1 <- 
+  test %>%
+  mutate(length, log(length))
+
+test1 %>%
+##rename(test1, "(log(length)" =  "lg_ln") ####### not working
+names(test1)[names(test1)=="log(length)"] <- "lg_ln"
+
+##### do linear regression model
+model1 <- lm(lg_ln ~ age_months, data = test1)
+model1 <- lm(age_months ~ lg_ln, data = test1) ### which way round!!
+######## check assumptions in ggfortify
+autoplot(model1, smooth.colour = NA)
+#########stats
+anova(model1)
+summary(model1)
+
+########### add trendline and CI's
+newX <- expand.grid(age_months = seq(from = 0.25, to = 2, length = 100))
+head(newX)
+newY <- predict(model1, newdata = newX, interval = "confidence")
+addThese <- data.frame(newX, newY)
+addThese <- rename(addThese, lg_ln = fit)
+
+```{r}
+ggplot(test1, aes(x = age_months, y = length)) + 
+  geom_point(col = "cornflowerblue", size = 3) +
+  labs(x = "age", y = "length") +
+  theme_bw() +
+  geom_smooth(data = addThese, aes(ymin = lwr, ymax = upr), stat = "identity")
+```
