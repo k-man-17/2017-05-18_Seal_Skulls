@@ -1,0 +1,9 @@
+attributeName,attributeDefinition,columnClasses,numberType,unit,instrument,minimum,maximum,formatString,definition,code,levels
+Registration_Number,Unique identifier within the seal skulls collection,character,NA,NA,NA,NA,NA,NA,NA,NA,NA
+Age,Age of seal known from tagging,numeric,integer,months,tag,1,329,NA,NA,NA,NA
+Sex,Sex of seal,factor,NA,NA,NA,NA,NA,NA,NA,"0, 1",Male;Female
+Locality,Location of collection,character,NA,NA,NA,NA,NA,NA,NA,NA,NA
+CBL,Condylobasal length,numeric,real,mm,Ruler,169,311,NA,NA,NA,NA
+ZW,Zygomatic width,numeric,real,mm,"Digital calipers, or ruler if exceeds calipers",90.33,189.36,NA,NA,NA,NA
+PL,Palatal length,numeric,real,mm,"Digital calipers, or ruler if exceeds calipers",69.96,134.82,NA,NA,NA,NA
+Comments,Description of the condition of the skull,character,NA,NA,NA,NA,NA,NA,NA,NA,NA
