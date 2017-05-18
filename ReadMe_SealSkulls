@@ -1,0 +1,2 @@
+#
+To avoid version clash(!), we can work on separate files or on different parts of the same file. Problems occur when changes are made to the same section by multiple users!
