@@ -2,7 +2,7 @@
 title: "Seal Skull Measurements"
 author: "Louise Barwell, Matthew Hodgkinson, Julija Kanto, Kamini Manick, Muriel Rabone"
 date: "19/05/2017"
-output: word_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE, echo = FALSE, message = FALSE, warning = FALSE}
@@ -134,7 +134,13 @@ geom_point(aes(y = PL), colour = "darkgreen", size = 3)+
 geom_point(aes(y = CBL), colour = "deeppink", size = 3)+
 xlab(label = "age months") + 
 ylab(label = "length")
+
 ```
+
+```{r out.width='100%', include=TRUE}
+knitr::include_graphics("CBL VS ZW.png")
+```
+
 
 MEAN and RANGE - AGE - Female
 
@@ -332,3 +338,7 @@ ggplot(test_P, aes(x = ln_age, y = PL)) +
 ```
 
 
+
+```{r out.width='75%', include=TRUE}
+knitr::include_graphics("H.grypus Poland.JPG")
+```
