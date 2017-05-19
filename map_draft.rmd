@@ -1,0 +1,43 @@
+---
+title: "maps_draft1"
+author: "seal_skulls_crew"
+date: "19 May 2017"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+```
+
+```{r}
+library(ggmap)
+library(ggplot2)
+```
+
+```{r include=TRUE}
+GB <- get_map(location = "Glasgow", source = "google",maptype = "satellite", zoom = 5)
+ggmap(GB)
+```
+
+```{r include=TRUE}
+ggmap(GB)+
+  scale_x_continuous(limits = c(-10,6))+
+  scale_y_continuous(limits = c(48,60))+
+  geom_point(aes(x = -5.8264, y = 59.1215, label = "North Rona"), colour = "red", size = 5)+
+  geom_point(aes(x = -2.9605, y = 58.9809, label = "Orkney"), colour = "red", size = 5)+
+  geom_point(aes(x = -2.83, y = 59.13, label = "Muckle Green holm"), colour = "red", size = 5)+
+    geom_text(aes(x = -5.8264, y = 59.1215, label = "North Rona"), nudge_y = 0.6, nudge_x = -2,  colour = "red", size = 5)+
+  geom_text(aes(x = -2.9605, y = 58.9809, label = "Orkney"), nudge_y = -0.4, colour = "red", size = 5)+
+  geom_text(aes(x = -2.83, y = 59.13, label = "Muckle Green holm"), nudge_x = 4, nudge_y = 0.6, colour = "red", size = 5)+
+  geom_point(aes(x = -2.76666, y = 56.4352, label = "Abertay Sands"), colour = "red", size = 5)+
+  geom_text(aes(x = -2.76666, y = 56.4352, label = "Abertay Sands"), nudge_x = -2, nudge_y = -0.4, colour = "red", size = 5)+
+  geom_point(aes(x = -2.126, y = 57.047, label = "Downies"), colour = "red", size = 5)+
+  geom_text(aes(x = -2.76666, y = 57.047, label = "Downies"), nudge_y = 0.6, colour = "red", size = 5)+
+ geom_point(aes(x = -0.153, y = 51.535, label = "London Zoo"), colour = "red", size = 5)+
+  geom_text(aes(x = -0.153, y = 51.535, label = "London Zoo"), nudge_y = -0.4, colour = "red", size = 5)+
+  geom_point(aes(x = -2.437, y = 56.702, label = "Montrose"), colour = "red", size = 5)+
+  geom_text(aes(x = -2.437, y = 56.702, label = "Montrose"), nudge_x = 3.1, colour = "red", size = 5)+
+  geom_point(aes(x = -0.614, y = 54.493, label = "Whitby"), colour = "red", size = 5)+
+  geom_text(aes(x = -0.614, y = 54.493, label = "Whitby"), nudge_y = -0.7, colour = "red", size = 5)
+```
