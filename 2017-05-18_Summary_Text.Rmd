@@ -5,33 +5,56 @@ date: "19/05/2017"
 output: word_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, include=FALSE, echo = FALSE, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, include = FALSE)
+```
+
+```{r echo=FALSE}
+library(dplyr)
+library(tidyverse)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+list.files()
 ```
 
 ## Introduction
 
 Task: Seal Skull Measurements
-Curator: Dr Richard Sabin
+Curator: Dr Richard Sabin, Collections Manager-Vertebrates, LS Division
 
+The seal skull crew had to take 3 measurements of seal skulls which were from various places in Scotland. Some of the seals had been culled.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+From looking at the tags attached to each speciment, we agreed to collect the following raw data and took it in turns to measure the skulls as selected by Richard:
 
-```{r cars}
-summary(cars)
+```{r echo=FALSE}
+cleandata <- read_csv("seal_skulls_clean.csv")
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r echo=FALSE}
+rawdata <- read_csv("2017-05-15_Seal_Skull_raw.csv")
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r include=TRUE}
+tbl_df(rawdata)
+```
 
-```{r}
-#Introduction
+```{r include=TRUE}
+write_csv(cleandata, path = "2017-05-15_Seal_Skull_raw.csv")
+```
 
+As a back up, we wrote down each measurement:
+
+```{r out.width='100%', include=TRUE}
+knitr::include_graphics('2017-05-15_Seal_Skull_Measurements-written.JPG')
+```
+
+```{r out.width='100%', include=TRUE}
+knitr::include_graphics("/2017-05-15_Photos_H.grypus/20170515_153537_HDR.jpg")
+```
+
+## Data Processing: Clean Data (LB)
+
+```{r include=TRUE}
+head(cleandata)
 ```
