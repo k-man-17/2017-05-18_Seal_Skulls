@@ -1,0 +1,28 @@
+---
+title: "Seal skulls Readme"
+author: "Louise J Barwell"
+date: "18 May 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Seal skull mini-project
+
+### Introduction
+
+This repository contains data and scripts for the analysis of skull measurements from a collection of seal skulls in the Natural History Museum, London.  The raw data contain measurements of condylobasal length, zygomatic width and palatal length for 23 individuals of the species Halichoerus grypus (grey seal) collected in the British Isles.  Twenty-three of the specimens were presented to the museum by Dr. H. R. Hewer (General Letter 1961/28) and two were presented by Dr. R. M. Laws.
+
+### Seal skulls data
+
+There is a raw (2017-05-15_Seal_Skull_raw.csv) and a clean (Seal_Skulls_clean.csv) version of the data.  The script clean_seal_skulls.R takes the raw data and cleans it ready for analysis.
+
+### Meta-data
+
+The file seal_skulls_metadata.csv is an attribute table with a description of each of the variables in the cleaned data, including units and class of data.  
+
+
+
+
