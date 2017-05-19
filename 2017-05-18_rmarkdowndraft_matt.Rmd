@@ -22,10 +22,12 @@ library(reprex)
 library(formatR)
 library(knitr)
 library(lubridate)
+library(RCurl)
 ```
 
 ```{r}
-#CLEAN CSV FILE LOCATION HERE
+seal_skulls <- read_csv(
+  "https://raw.githubusercontent.com/k-man-17/2017-05-18_Seal_Skulls/master/seal_skulls_clean.csv")
 ```
 
 ```{r, eval = FALSE}
