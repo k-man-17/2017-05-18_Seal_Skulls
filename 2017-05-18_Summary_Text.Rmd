@@ -20,13 +20,17 @@ Task: Seal Skull Measurements
 
 Curator: Dr Richard Sabin, Collections Manager-Vertebrates, LS Division
 
-The seal skull crew had to take 3 measurements of seal skulls which were from various places in Scotland. Some of the seals had been culled.
+This repository contains data and scripts for the analysis of skull measurements from a collection of seal skulls in the Natural History Museum, London.  The raw data contain measurements of condylobasal length, zygomatic width and palatal length for 23 individuals of the species Halichoerus grypus (grey seal) collected in the British Isles.  Twenty-three of the specimens were presented to the museum by Dr. H. R. Hewer (General Letter 1961/28) and two were presented by Dr. R. M. Laws. The seal skulls which were from various places in Scotland. Some of the seals had been culled.
+
+```{r, include=TRUE}
+list.files()
+```
 
 ```{r out.width='75%', include=TRUE}
 knitr::include_graphics('IMG_3698.JPG')
 ```
 
-From looking at the tags attached to each speciment, we agreed to collect the following raw data and took it in turns to measure the skulls as selected by Richard:
+From looking at the tags attached to each specimen, we agreed to collect the following raw data and took it in turns to measure the skulls as selected by Richard:
 
 ```{r echo=FALSE}
 cleandata <- read_csv("seal_skulls_clean.csv")
@@ -50,20 +54,16 @@ knitr::include_graphics('2017-05-15_Seal_Skull_Measurements-written.JPG')
 knitr::include_graphics("2017-05-15_Photos_H.grypus/20170515_153537_HDR.jpg")
 ```
 
-## Github Repository
+## Data Processing: Clean Data
 
-```{r, include=TRUE}
-list.files()
-```
-
-## Data Processing: Clean Data (LB)
+The file clean_seal_skulls.R in the git repository takes the raw data and outputs a clean version (the file seal_skulls_clean.csv), which is used in all analyses.
 
 ```{r include=TRUE}
 head(cleandata)
 ```
 
 
-## Data Processing: Metadata (MH)
+## Data Processing: Metadata
 
 ```{r echo=FALSE}
 metadatashell <- read_csv("seal_skulls_metadata_shell.csv")
@@ -75,4 +75,5 @@ head(metadatashell)
 head(metadata)
 ```
 
-## Data Analysis (MR)
+## Data Analysis
+
