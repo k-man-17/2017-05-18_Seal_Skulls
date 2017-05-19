@@ -1,0 +1,123 @@
+---
+title: "seal_skull_murielr_180517"
+author: "Muriel"
+date: "18 May 2017"
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+list.files()
+getwd()
+library(tidyverse)
+library(ggfortify)
+library(dplyr)
+library(tidyr)
+
+data <- read.csv("seal_clean.csv")
+
+head(data)
+names(data)
+plot(data)
+```
+###### all on same plot
+```{r}
+ggplot(data, aes(x = age_months))+
+geom_point(aes(y = ZW), colour = "steelblue", size = 3)+
+geom_point(aes(y = PL), colour = "darkgreen", size = 3)+
+geom_point(aes(y = CBL), colour = "deeppink", size = 3)+
+xlab(label = "age months") + 
+ylab(label = "length")
+
+###### one plot
+ggplot(data, aes(age_months, CBL, colour = Sex)) +
+  geom_point( size = 3)
+
+###length by width - liner relship
+ggplot(data, aes(CBL, ZW, colour = Sex)) +
+  geom_point( size = 4)
+
+##LM MODELS
+##do LM model for each meas individ, sep also by sex
+data2 <- 
+  data %>%
+  mutate(CBL, log(CBL))
+
+##newer <- rename(data, log(CBL) = lg_cbl)
+names(data2)[names(data2)=="log(CBL)"] <- "lg_cbl"
+  
+model_1 <- lm(lg_cbl ~ age_months, data = data2)
+model_2 <- lm(PL ~ age_months, data = data)
+model_3 <- lm(ZW ~ age_months, data = data)
+summary(model_1)
+autoplot(model_1)  #### fitted lines
+autoplot(model_2) 
+autoplot(model_3)
+
+####basic plot
+plot(data$age_months, data$CBL)
+plot(data$age_months, data$lg_cbl)
+new = data.frame(age_months = seq(min(data$age_months),max(data$age_months),len=100))
+lines(new$age_months, predict(model_1, newdata=new)
+
+lines(prediction, data)
+newX <- expand.grid(age_months = 10)
+prediction <- predict(model_1, newdata = newX, interval = "confidence")
+############
+##data2
+newX <- expand.grid(age_months = seq(from = 0.25, to = 2, length = 100))
+head(newX)   
+newY <- predict(model_1, newdata = newX, interval = "confidence")
+addThese <- data.frame(newX, newY)
+addThese <- rename(addThese, lg_ln = fit)
+  labs(x = "age", y = "CBL length") +
+
+ggplot(data2, aes(x = age_months, y = lg_cbl)) + 
+  geom_point(col = "cornflowerblue", size = 3) +
+  geom_smooth(data = addThese, aes(ymin = lwr, ymax = upr), stat = "identity")
+```
+
+####### do a linear regression model and add trendline -- 
+###### first change data to length in 1 column
+```{r} 
+test <-
+  data %>%
+  gather(l_type, length, CBL:PL)
+
+######### log length
+
+test1 <- 
+  test %>%
+  mutate(length, log(length))
+
+test1 %>%
+##rename(test1, "(log(length)" =  "lg_ln") ####### not working
+names(test1)[names(test1)=="log(length)"] <- "lg_ln"
+
+##### do linear regression model
+model1 <- lm(lg_ln ~ age_months, data = test1)
+model1 <- lm(age_months ~ lg_ln, data = test1) ### which way round!!
+######## check assumptions in ggfortify
+autoplot(model1, smooth.colour = NA)
+#########stats
+anova(model1)
+summary(model1)
+```
+########### add trendline and CI's
+```{r} 
+newX <- expand.grid(age_months = seq(from = 0.25, to = 2, length = 100))
+head(newX)
+newY <- predict(model1, newdata = newX, interval = "confidence")
+addThese <- data.frame(newX, newY)
+addThese <- rename(addThese, lg_ln = fit)
+
+
+ggplot(test1, aes(x = age_months, y = length)) + 
+  geom_point(col = "cornflowerblue", size = 3) +
+  labs(x = "age", y = "length") +
+  theme_bw() +
+  geom_smooth(data = addThese, aes(ymin = lwr, ymax = upr), stat = "identity")
+```
