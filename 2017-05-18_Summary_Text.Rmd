@@ -47,12 +47,9 @@ knitr::include_graphics('2017-05-15_Seal_Skull_Measurements-written.JPG')
 ```
 
 ```{r out.width='100%', include=TRUE}
-knitr::include_graphics("//2017-05-15_Photos_H.grypus//20170515_153537_HDR.jpg")
+knitr::include_graphics("2017-05-15_Photos_H.grypus/20170515_153537_HDR.jpg")
 ```
 
-```{r}
-?file.path
-```
 ## Github Repository
 
 ```{r, include=TRUE}
