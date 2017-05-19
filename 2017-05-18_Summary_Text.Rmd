@@ -14,16 +14,17 @@ library(dplyr)
 library(tidyverse)
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE, include=FALSE}
-list.files()
-```
-
 ## Introduction
 
 Task: Seal Skull Measurements
+
 Curator: Dr Richard Sabin, Collections Manager-Vertebrates, LS Division
 
 The seal skull crew had to take 3 measurements of seal skulls which were from various places in Scotland. Some of the seals had been culled.
+
+```{r out.width='75%', include=TRUE}
+knitr::include_graphics('IMG_3698.JPG')
+```
 
 From looking at the tags attached to each speciment, we agreed to collect the following raw data and took it in turns to measure the skulls as selected by Richard:
 
@@ -39,18 +40,23 @@ rawdata <- read_csv("2017-05-15_Seal_Skull_raw.csv")
 tbl_df(rawdata)
 ```
 
-```{r include=TRUE}
-write_csv(cleandata, path = "2017-05-15_Seal_Skull_raw.csv")
-```
-
 As a back up, we wrote down each measurement:
 
-```{r out.width='100%', include=TRUE}
+```{r out.width='75%', include=TRUE}
 knitr::include_graphics('2017-05-15_Seal_Skull_Measurements-written.JPG')
 ```
 
 ```{r out.width='100%', include=TRUE}
-knitr::include_graphics("/2017-05-15_Photos_H.grypus/20170515_153537_HDR.jpg")
+knitr::include_graphics("//2017-05-15_Photos_H.grypus//20170515_153537_HDR.jpg")
+```
+
+```{r}
+?file.path
+```
+## Github Repository
+
+```{r, include=TRUE}
+list.files()
 ```
 
 ## Data Processing: Clean Data (LB)
@@ -58,3 +64,18 @@ knitr::include_graphics("/2017-05-15_Photos_H.grypus/20170515_153537_HDR.jpg")
 ```{r include=TRUE}
 head(cleandata)
 ```
+
+
+## Data Processing: Metadata (MH)
+
+```{r echo=FALSE}
+metadatashell <- read_csv("seal_skulls_metadata_shell.csv")
+metadata <- read_csv("seal_skulls_metadata.csv")
+```
+
+```{r include=TRUE}
+head(metadatashell)
+head(metadata)
+```
+
+## Data Analysis (MR)
