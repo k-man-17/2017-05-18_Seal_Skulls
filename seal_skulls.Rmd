@@ -42,30 +42,33 @@ test <-
 ######### log length
 test1 <- 
   test %>%
-  mutate(length, log(length))
+  #mutate(length, log(length)) %>%
+  mutate(age_months, "ln_age" = log(age_months))
 
-test1 %>%
+#test1 %>%
 ##rename(test1, "(log(length)" =  "lg_ln") ####### not working
-names(test1)[names(test1)=="log(length)"] <- "lg_ln"
+#names(test1)[names(test1)=="log(length)"] <- "lg_ln"
 
 ##### do linear regression model
-model1 <- lm(lg_ln ~ age_months, data = test1)
-model1 <- lm(age_months ~ lg_ln, data = test1) ### which way round!!
+model1 <- lm(length ~ ln_age, data = test1)
+#model1 <- lm(age_months ~ lg_ln, data = test1) ### which way round!!
 ######## check assumptions in ggfortify
-autoplot(model1, smooth.colour = NA)
+plot(model1)
 #########stats
 anova(model1)
 summary(model1)
 
 ########### add trendline and CI's
-newX <- expand.grid(age_months = seq(from = 0.25, to = 2, length = 100))
+newX <- expand.grid(age_months = seq(from = 0.25, to = 6, length = 100))
 head(newX)
+names(newX) <- "ln_age"
+
 newY <- predict(model1, newdata = newX, interval = "confidence")
 addThese <- data.frame(newX, newY)
-addThese <- rename(addThese, lg_ln = fit)
+addThese <- rename(addThese, length = fit)
 
-```{r}
-ggplot(test1, aes(x = age_months, y = length)) + 
+
+ggplot(test1, aes(x = ln_age, y = length)) + 
   geom_point(col = "cornflowerblue", size = 3) +
   labs(x = "age", y = "length") +
   theme_bw() +
